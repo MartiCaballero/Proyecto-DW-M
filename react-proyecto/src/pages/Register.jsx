@@ -1,44 +1,54 @@
-import { useState } from 'react';
-import Header from "../Components/Header";
+import React, { useState } from "react";
 
-export default function LoginPage() {
+export default function Register () {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
+        e.preventDefault();
         setLoading(true); 
+        setError(''); 
+        setSuccess('');
 
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ username, email, password }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('token', data.token);
-                console.log('Login exitoso:', data);
+                setSuccess('Usuario registrado con éxito');
+                console.log('Registro exitoso:', data);
             } else {
-                setError(data.message || 'Error al iniciar sesión');
+                setError(data.message || 'Error al registrar usuario');
             }
         } catch (err) {
-            setError('Error en el servidor. Intenta más tarde.');
+            setError('Error en el servidor. Intenta mas tarde.');
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
     return (
-        <>
-            <Header />
-            <h2>Login Page</h2>
-            <form onSubmit={handleLogin}>
+        <div>
+            <h2>Register</h2>
+            <form onSubmit={handleRegister}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
                 <input
                     type="email"
                     placeholder="Email"
@@ -54,10 +64,11 @@ export default function LoginPage() {
                     required
                 />
                 <button type="submit" disabled={loading}>
-                    {loading ? 'Cargando...' : 'Iniciar sesión'}
+                    {loading ? 'Cargando...' : 'Registrarse'}
                 </button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-        </>
+            {success && <p style={{ color: 'green' }}>{success}</p>}
+        </div>
     );
-}
+};
