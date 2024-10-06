@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Header from "../Components/Header";
+import './Pages.css';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -38,26 +39,36 @@ export default function LoginPage() {
     return (
         <>
             <Header />
-            <h2>Login Page</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Cargando...' : 'Iniciar sesión'}
-                </button>
-            </form>
+                <div class="container">
+                    <div class="screen">
+                        <div class="screen__content">
+                        <h2>Login Page</h2>
+                        <form class="login" onSubmit={handleLogin}>
+                            <div class= "login__field">
+                                    <input
+                                    type="email"
+                                    class= "login__input"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="password"
+                                    class= "login__input"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <button class="login__submit" type="submit" disabled={loading}>
+                                    {loading ? 'Cargando...' : 'LOGIN'}
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </>
     );

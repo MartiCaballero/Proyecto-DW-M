@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './Pages.css';
 
 export default function Register () {
     const [username, setUsername] = useState('');
@@ -39,36 +40,43 @@ export default function Register () {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Cargando...' : 'Registrarse'}
-                </button>
-            </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
+        <div class="container">
+            <div class="screen">
+                <div class="screen__content">
+                    <h2>Register</h2>
+                    <form class="login" onSubmit={handleRegister}>
+                        <input
+                            type="text"
+                            class="login__input"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="email"
+                            class="login__input"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            class="login__input"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <button class="login__submit" type="submit" disabled={loading}>
+                            {loading ? 'Cargando...' : 'Registrarse'}
+                        </button>
+                    </form>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {success && <p style={{ color: 'green' }}>{success}</p>}
+                </div>
+            </div>
         </div>
     );
 };
