@@ -8,10 +8,11 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
+        e.preventDefault();
         setLoading(true); 
 
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ export default function LoginPage() {
         } catch (err) {
             setError('Error en el servidor. Intenta más tarde.');
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 
