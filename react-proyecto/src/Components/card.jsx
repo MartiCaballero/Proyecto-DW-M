@@ -45,7 +45,7 @@ export default function RecipeReviewCard({image, caption}) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  
   console.log(image);
   
 
