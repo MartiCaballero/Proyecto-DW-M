@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import Header from "../Components/Header";
 import './Pages.css';
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -36,6 +39,16 @@ export default function LoginPage() {
         }
     };
 
+    const redirectRegister = () => {
+        navigate('/Register');
+        
+    };
+
+    const redirectHome = () => {
+        navigate('/home');
+        
+    };
+
     return (
         <>
             <Header />
@@ -61,9 +74,12 @@ export default function LoginPage() {
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
-                                <button class="login__submit" type="submit" disabled={loading}>
+                                <button class="login__submit" type="submit" onClick={redirectHome} disabled={loading}>
                                     {loading ? 'Cargando...' : 'LOGIN'}
                                 </button>
+
+                                <button class="login__submit" onClick={redirectRegister}>Registrarse</button>
+
                             </div>
                             </form>
                         </div>
