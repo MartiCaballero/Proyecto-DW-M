@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './Pages.css';
+import { useNavigate } from "react-router-dom";
 
 export default function Register () {
     const [username, setUsername] = useState('');
@@ -8,6 +9,8 @@ export default function Register () {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -27,6 +30,7 @@ export default function Register () {
             const data = await response.json();
 
             if (response.ok) {
+                localStorage.setItem('token', data.token);
                 setSuccess('Usuario registrado con éxito');
                 console.log('Registro exitoso:', data);
             } else {
@@ -36,6 +40,7 @@ export default function Register () {
             setError('Error en el servidor. Intenta mas tarde.');
         } finally {
             setLoading(false);
+            navigate('/home');
         }
     };
 
