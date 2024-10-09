@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/card";
-import "./Home.css"
+import navBar from "../Components/navBar";
+import "./Home.css";
 
 export default function HomePage(){
     let [posts, setPosts] = useState([]);
@@ -65,7 +66,7 @@ export default function HomePage(){
 
     return(
         <>
-            <h2>Home Page</h2>
+            <h2>Fakestagram</h2>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div className="card-grid">
@@ -73,6 +74,7 @@ export default function HomePage(){
                     <Card key={post._id} image={post.imagePath || post.imageUrl} caption={post.caption} />
                 ))}
             </div>
+            <navBar />
         </>
     );
 }

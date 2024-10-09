@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Moul&display=swap');
+
 /* Contenedor principal de la página de login */
 body{
 	background-color:white;
@@ -9,7 +11,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     padding: 0 20px;
 }
 
@@ -26,11 +28,14 @@ body{
 /* Título de la aplicación */
 .title {
     font-size: 40px;
-	font-weight: 400;
-    font-family: 'Moul';
-    color: #BD61DE;
+    font-weight: 400;
+    font-family: 'Moul', sans-serif;
+    background: linear-gradient(90deg, #BD61DE 0%, #A6FADC 100%);
+    -webkit-background-clip: text;
+    color: transparent;
     margin-bottom: 20px;
-	word-wrap: break-word;
+    word-wrap: break-word;
+
 }
 
 /* Contenedor del icono */
@@ -99,7 +104,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: #D9D9D9;
     font-size: 16px;
     font-weight: 600;
 }
@@ -120,13 +125,14 @@ body{
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #D9D9D9;
-    border-radius: 5px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
     font-size: 14px;
 }
 
 /* Botones del formulario */
 .login_submit {
-    width: 100%;
+    width: 80%;
     padding: 15px;
     background-color: #BD61DE;
     border: none;
@@ -135,6 +141,7 @@ body{
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 10px;
+    margin-left: 40px;
 }
 
 .login_submit:disabled {

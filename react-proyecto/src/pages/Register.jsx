@@ -46,13 +46,17 @@ export default function Register () {
 
     return (
         <div class="container">
-            <div class="screen">
-                <div class="screen__content">
-                    <h2>Register</h2>
-                    <form class="login" onSubmit={handleRegister}>
+            <div class="box">
+                <div>
+                    <h2 class="title">Register</h2>
+                    <div class="icon-container">
+                            <div class="icon-bg"></div>
+                            <div class="icon-content"></div>
+                        </div>
+                    <form class="login-form" onSubmit={handleRegister}>
                         <input
                             type="text"
-                            class="login__input"
+                            class="login_input"
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -60,7 +64,7 @@ export default function Register () {
                         />
                         <input
                             type="email"
-                            class="login__input"
+                            class="login_input"
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -68,14 +72,14 @@ export default function Register () {
                         />
                         <input
                             type="password"
-                            class="login__input"
+                            class="login_input"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button class="login__submit" type="submit" disabled={loading}>
-                            {loading ? 'Cargando...' : 'Registrarse'}
+                        <button class="login_submit" type="submit" disabled={loading}>
+                            {loading ? 'Cargando...' : 'Sign up'}
                         </button>
                     </form>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
