@@ -55,8 +55,10 @@ export default function LoginPage() {
                 <div class="container">
                     <div class="box">
                         <div class="icon-container">
-                            <div class="icon-bg"></div>
+                            <div class="icon-bg">
                             <div class="icon-content"></div>
+
+                            </div>
                         </div>
 
                         <div class="title">fakestagram</div>

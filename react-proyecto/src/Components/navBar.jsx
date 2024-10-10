@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Component = () => {
+const navbar = () => {
     return (
         <div className="container">
         {/* Icon container */}
@@ -23,4 +23,4 @@ const Component = () => {
     );
 };
 
-export default Component;
+export default navbar;

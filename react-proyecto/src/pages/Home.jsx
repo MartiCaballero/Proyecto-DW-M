@@ -74,7 +74,8 @@ export default function HomePage(){
                     <Card key={post._id} image={post.imagePath || post.imageUrl} caption={post.caption} />
                 ))}
             </div>
-            <navBar />
+            
+            <navbar />
         </>
     );
 }
