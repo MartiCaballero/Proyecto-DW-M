@@ -1,0 +1,119 @@
+/* Estructura base */
+.friendProfilePage {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  padding: 40px;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profileDetails {
+  flex: 1;
+}
+
+.profileTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.profileStats {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.profileStats span {
+  margin-right: 20px;
+}
+
+.profileDescription p {
+  margin: 0;
+}
+
+.addFriendButton {
+  padding: 8px 16px;
+  background-color: #efefef;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Galería */
+.gallery {
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav button {
+  display: flex;
+  align-items: center; /* Alinea el texto e ícono en la misma fila */
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.3s ease, font-weight 0.3s ease; /* Para la animación del texto */
+  text-align: left;
+}
+
+.nav button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  transition: transform 0.3s ease; /* Para la animación de la imagen */
+}
+
+.nav button:hover {
+  color: #000; /* Cambia el color del texto al hacer hover */
+  font-weight: 700;
+}
+
+.nav button:hover img {
+  transform: scale(1.2); /* Agranda la imagen un 20% al hacer hover */
+}
+
+
+
