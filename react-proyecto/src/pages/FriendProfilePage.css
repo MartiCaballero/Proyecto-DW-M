@@ -1,4 +1,4 @@
-.friendProfilePage {
+.ProfilePage {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -36,6 +36,7 @@
   padding: 40px;
   width: 100%;
 }
+
 
 .profileHeader {
   display: flex;
