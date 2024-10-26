@@ -1,0 +1,29 @@
+/* Contenedor principal */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar fijado en la parte superior izquierda */
+.sidebar {
+    position: fixed; /* Fija el sidebar en su posición */
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para diferenciarlo del contenido */
+}
+
+/* Ajuste para el contenido principal */
+.mainContent {
+    margin-left: 250px; /* Desplaza el contenido principal a la derecha del sidebar */
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

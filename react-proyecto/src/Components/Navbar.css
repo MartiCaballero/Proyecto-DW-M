@@ -1,0 +1,36 @@
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.nav button {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .nav button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav button:hover {
+    color: #000;
+    font-weight: 700;
+  }
+  
+  .nav button:hover img {
+    transform: scale(1.2);
+  }

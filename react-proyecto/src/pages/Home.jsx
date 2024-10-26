@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/card";
-import navBar from "../Components/navBar";
 import "./Home.css";
+import Navbar from "../Components/Navbar";
+import Header from "../Components/Header";
 
 export default function HomePage(){
     let [posts, setPosts] = useState([]);
@@ -66,16 +67,23 @@ export default function HomePage(){
 
     return(
         <>
-            <h2>Fakestagram</h2>
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            <div className="card-grid">
-                {posts.map((post) => (
-                    <Card key={post._id} image={post.imagePath || post.imageUrl} caption={post.caption} />
-                ))}
+        <div className="container">
+            <aside className="sidebar">
+                <Navbar />
+            </aside>
+            <div className="mainContent">
+                <Header />
+                <div className="ProfilePage">
+                    {loading && <p>Loading...</p>}
+                    {error && <p>{error}</p>}
+                    <div className="card-grid">
+                    {posts.map((post) => (
+                        <Card key={post._id} image={post.imagePath || post.imageUrl} caption={post.caption} />
+                    ))}
+                </div>
             </div>
-            
-            <navbar />
-        </>
-    );
+        </div>
+    </div>
+    </>
+);
 }

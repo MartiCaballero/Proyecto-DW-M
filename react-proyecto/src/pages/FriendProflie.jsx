@@ -18,8 +18,7 @@ const FriendProfilePage = () => {
   };
 
   return (
-    <div className="friendProfilePage">
-      <aside className="sidebar">
+    <div className="ProfilePage">
         <h1 className="logo" onClick={() => navigate("/")}>
           fakestagram
         </h1>
@@ -42,7 +41,7 @@ const FriendProfilePage = () => {
           </button>
           <button onClick={() => navigate("/profile")}>Profile</button>
         </nav>
-      </aside>
+      
 
       <div className="mainContent">
         <header className="profileHeader">

@@ -1,90 +1,62 @@
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 3 columns */
-    gap: 20px; /* Space between the cards */
-    padding: 20px;
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
 }
 
+.sidebar {
+    width: 20%; /* Sidebar ocupa el 20% de la pantalla */
+    background-color: #f0f0f0;
+}
+
+.ProfilePage{
+    min-width: 80%;
+    margin-top: 30%;
+}
+.mainContent {
+    width: 80%; /* MainContent ocupa el 80% restante */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; /* Permite hacer scroll si el contenido excede la altura */
+}
+
+.card-grid {
+    display: flex;
+    flex-direction: column; /* Para una columna de cards */
+    gap: 20px;
+    width: 100%; /* Asegura que el grid ocupe el ancho de mainContent */
+    align-items: center; /* Centra las cards en el espacio disponible */
+}
+
+.card-grid > * {
+    width: 80%; /* Cada card ocupa el 80% del ancho disponible */
+    max-width: 800px; /* Tamaño máximo opcional */
+    box-sizing: border-box;
+}
+
+/* Media Queries */
 @media (max-width: 900px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+    .sidebar {
+        width: 25%; /* Sidebar un poco más grande en pantallas medianas */
+    }
+    .mainContent {
+        width: 75%;
+    }
+    .card-grid > * {
+        width: 90%; /* Cards un poco más grandes en pantallas medianas */
     }
 }
 
 @media (max-width: 600px) {
-    .card-grid {
-        grid-template-columns: 1fr; /* 1 column on mobile */
+    .sidebar {
+        display: none; /* Oculta sidebar en pantallas pequeñas */
     }
-}
-
-
-.container {
-    width: 100%;
-    height: 100%;
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    background: white;
-    border-top: 1px solid #D0D0D0;
-    justify-content: space-between;
-    align-items: flex-start;
-    display: inline-flex;
-}
-
-.icon-container {
-    width: 24px;
-    height: 24px;
-    padding: 2px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.icon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-}
-
-.inner-icon {
-    width: 5px;
-    height: 7.5px;
-    left: 7.5px;
-    top: 12.49px;
-    position: absolute;
-    background: #1E1E1E;
-}
-
-.icon-background {
-    width: 20px;
-    height: 20px;
-    left: 0;
-    top: 0;
-    position: absolute;
-    background: #1E1E1E;
-}
-
-.profile-container {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
-    display: inline-flex;
-}
-
-.profile-image {
-    width: 24px;
-    height: 24px;
-    padding: 1px;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex;
-}
-
-.profile-image img {
-    width: 22px;
-    height: 22px;
-    border-radius: 9999px;
-    border: 0.5px solid white;
+    .mainContent {
+        width: 100%; /* MainContent ocupa todo el ancho */
+    }
+    .card-grid > * {
+        width: 90%; /* Cards ocupan 90% en pantallas pequeñas */
+    }
 }
