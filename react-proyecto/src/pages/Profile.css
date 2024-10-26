@@ -4,26 +4,49 @@
     height: 100vh;
 }
 
-/* Sidebar fijado en la parte superior izquierda */
 .sidebar {
-    position: fixed; /* Fija el sidebar en su posición */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 250px;
-    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    height: 100vh; 
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para diferenciarlo del contenido */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajuste para el contenido principal */
 .mainContent {
-    margin-left: 250px; /* Desplaza el contenido principal a la derecha del sidebar */
+    margin-left: 250px;
     padding: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.buttonEdit {
+    background: linear-gradient(90deg, #BD61DE 0%, #A6FADC 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.containerPrincipal{
+    margin-top: 10%;
+}
+
+.editProfileButton{
+    padding: 8px 16px;
+    background-color: #efefef;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.containerButtons{
+    justify-content: space-between;
 }
