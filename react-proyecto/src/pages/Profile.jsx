@@ -18,7 +18,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState({});
 
   const [formData, setFormData] = useState({
-    userName: "",
+    username: "",
     description: "",
   });
 
@@ -36,8 +36,12 @@ export default function ProfilePage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(formData);
+
     axios
-      .put("http://localhost:3000/api/user/profile", formData)
+      .put("http://localhost:3000/api/user/profile/edit", formData, {
+        headers: { Authorization: "Bearer " + TOKEN },
+      })
       .then((response) => {
         console.log(response);
         window.location.reload();
