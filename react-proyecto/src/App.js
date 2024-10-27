@@ -1,26 +1,24 @@
-
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import FriendProfilePage from './pages/FriendProflie';
-import HomePage from './pages/Home';
-import LoginPage from './pages/Login';
-import Register from './pages/Register';
-import ProfilePage from './pages/Profile';
-import NoPage from './pages/NoPage';
-import PrivateRoute from './Components/PrivateRoute';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
+import LoginPage from "./pages/Login";
+import Register from "./pages/Register";
+import ProfilePage from "./pages/Profile";
+import NoPage from "./pages/NoPage";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
-    <div className='Routes'>
+    <div className="Routes">
       <BrowserRouter>
         <Routes>
           {/* Ruta pública */}
-          <Route path='/Login' element={<LoginPage />} />
-          <Route path='/Register' element={<Register />} />
+          <Route path="/Login" element={<LoginPage />} />
+          <Route path="/Register" element={<Register />} />
 
           {/* Rutas privadas */}
           <Route
-            path='/'
+            path="/"
             element={
               <PrivateRoute>
                 <HomePage />
@@ -28,7 +26,7 @@ function App() {
             }
           />
           <Route
-            path='/home'
+            path="/home"
             element={
               <PrivateRoute>
                 <HomePage />
@@ -36,15 +34,7 @@ function App() {
             }
           />
           <Route
-            path='/FriendProfile'
-            element={
-              <PrivateRoute>
-                <FriendProfilePage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path='/Profile'
+            path="/Profile"
             element={
               <PrivateRoute>
                 <ProfilePage />
@@ -53,7 +43,7 @@ function App() {
           />
 
           {/* Ruta para manejar 404 */}
-          <Route path='/*' element={<NoPage />} />
+          <Route path="/*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -61,4 +51,3 @@ function App() {
 }
 
 export default App;
-

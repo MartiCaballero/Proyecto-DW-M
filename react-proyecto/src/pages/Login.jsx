@@ -1,108 +1,117 @@
-import { useState } from 'react';
-import Header from "../Components/Header";
-import './Pages.css';
+import { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import Header from "../Components/Header";
+import "./Pages.css";
+
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoading(true); 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log("entre");
 
-        try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                localStorage.setItem('token', data.token);
-                console.log('Login exitoso:', data);
-            } else {
-                setError(data.message || 'Error al iniciar sesión');
-            }
-        } catch (err) {
-            setError('Error en el servidor. Intenta más tarde.');
-        } finally {
-            setLoading(false);
+    axios
+      .post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-    };
+      )
+      .then((res) => {
+        console.log(res);
 
-    const redirectRegister = () => {
-        navigate('/Register');
-        
-    };
+        localStorage.setItem("token", res.data.token);
+        console.log("Login exitoso:", res.data);
+        setLoading(false);
+        redirectHome();
+      })
+      .catch((error) => {
+        setError(error.message || "Error al iniciar sesión");
+        setLoading(false);
+        console.error(error);
+      });
+  };
 
-    const redirectHome = () => {
-        navigate('/home');
-        
-    };
+  const redirectRegister = () => {
+    navigate("/Register");
+  };
 
-    return (
-        <>
-            <Header />
-                <div class="container">
-                    <div class="box">
-                        <div class="icon-container">
-                            <div class="icon-bg">
-                            <div class="icon-content"></div>
+  const redirectHome = () => {
+    navigate("/");
+  };
 
-                            </div>
-                        </div>
+  return (
+    <>
+      <Header />
+      <div className="container">
+        <div className="box">
+          <div className="icon-container">
+            <div className="icon-bg">
+              <div className="icon-content"></div>
+            </div>
+          </div>
 
-                        <div class="title">fakestagram</div>
-                        <div class="login-button-container">
-                            <div class="login-button-text"></div>
-                            <form class="login-form" onSubmit={handleLogin}>
-                                <div class="login_field">
-                                    <input
-                                        type="email"
-                                        class="login_input"
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                </div>
+          <div className="title">fakestagram</div>
+          <div className="login-button-container">
+            <div className="login-button-text"></div>
+            <form className="login-form" onSubmit={handleLogin}>
+              <div className="login_field">
+                <input
+                  type="email"
+                  className="login_input"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
-                                <div class="login_field">
-                                    <input
-                                        type="password"
-                                        class="login_input"
-                                        placeholder="Password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                    />
-                                </div>
+              <div className="login_field">
+                <input
+                  type="password"
+                  className="login_input"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
 
-                                <button class="login_submit" type="submit" onClick={redirectHome} disabled={loading}>
-                                    {loading ? 'Cargando...' : 'Login'}
-                                </button>
-
-                            </form>
-                            <div class="text-box">
-                            <span class="text-light">Create account</span>
-                            <span class="text-bold" style={{textDecoration: 'bold', cursor: 'pointer'}} onClick={redirectRegister}> here</span>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            
-            {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-            </>
-
-    );
-        
+              <button className="login_submit" type="submit" disabled={loading}>
+                {loading ? "Cargando..." : "Login"}
+              </button>
+            </form>
+            <div className="text-box">
+              <span className="text-light">Create account</span>
+              <span
+                className="text-bold"
+                style={{ textDecoration: "bold", cursor: "pointer" }}
+                onClick={redirectRegister}
+              >
+                {" "}
+                here
+              </span>
+              {error && (
+                <p style={{ color: "red", textAlign: "center" }}>{error}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

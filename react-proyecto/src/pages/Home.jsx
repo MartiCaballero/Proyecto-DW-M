@@ -1,89 +1,136 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 import Card from "../Components/card";
 import "./Home.css";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/navBar";
 import Header from "../Components/Header";
+import ProfilesList from "../Components/ProfileList";
 
-export default function HomePage(){
-    let [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+export default function HomePage() {
+  let [posts, setPosts] = useState([]);
+  let [profiles, setProfiles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            setLoading(true);
-            const TOKEN = localStorage.getItem('token');
+  useEffect(() => {
+    const TOKEN = localStorage.getItem("token");
 
-            try {
-                const response = await fetch('http://localhost:3000/api/posts/feed', {
-                    method: 'GET',
+    const fetchPosts = async () => {
+      setLoading(true);
+
+      try {
+        const response = await fetch("http://localhost:3000/api/posts/feed", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + TOKEN,
+          },
+        });
+
+        let data = await response.json();
+
+        if (response.ok) {
+          const updatedPosts = await Promise.all(
+            data.map(async (element) => {
+              let path = element.imageUrl.split("/");
+
+              try {
+                const imgResponse = await fetch(
+                  "http://localhost:3000/api/posts/images/" +
+                    path[path.length - 1],
+                  {
+                    method: "GET",
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' +  TOKEN
+                      "Content-Type": "application/json",
+                      Authorization: "Bearer " + TOKEN,
                     },
-                });
+                  }
+                );
 
-                let data = await response.json();
+                const imageBlob = await imgResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
 
-                if (response.ok) {
-                    const updatedPosts = await Promise.all(data.map(async (element) => {
-                        let path = element.imageUrl.split("/");
-                        
-                        try {
-                            const imgResponse = await fetch('http://localhost:3000/api/posts/images/' + path[path.length - 1], {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': 'Bearer ' + TOKEN 
-                                },
-                            });
+                // Return the updated element with the imagePath
+                return { ...element, imageUrl: imageUrl };
+              } catch (error) {
+                console.error("Error fetching image:", error);
+                return element; // In case of an error, return the original element
+              }
+            })
+          );
 
-                            const imageBlob = await imgResponse.blob();
-                            const imageUrl = URL.createObjectURL(imageBlob);
+          setPosts(updatedPosts);
+        } else {
+          setError(data.message || "Error al obtener publicaciones");
+        }
+      } catch (err) {
+        setError("Error en el servidor. Intenta más tarde.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                            // Return the updated element with the imagePath
-                            return {...element, imageUrl: imageUrl};
+    const fetchUserFriends = async () => {
+      let friends = [];
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/user/profile/" + jwtDecode(TOKEN).id,
+          {
+            headers: { Authorization: "Bearer " + TOKEN },
+          }
+        );
 
-                        } catch (error) {
-                            console.error("Error fetching image:", error);
-                            return element; // In case of an error, return the original element
-                        }
-                    }));
+        friends = response.data.user.friends.map((friend) => friend._id);
 
-                    setPosts(updatedPosts);
-                } else {
-                    setError(data.message || 'Error al obtener publicaciones');
-                }
-            } catch (err) {
-                setError('Error en el servidor. Intenta más tarde.');
-            } finally {
-                setLoading(false);
-            }
-        };
+        axios
+          .get("http://localhost:3000/api/user/all/", {
+            headers: { Authorization: "Bearer " + TOKEN },
+          })
+          .then((response) => {
+            const nonFriendProfiles = response.data.filter(
+              (profile) => !friends.includes(profile._id)
+            );
 
-        fetchPosts(); // Call the async function
-        
-    }, []);
+            setProfiles(nonFriendProfiles);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
-    return(
-        <>
-        <div className="container">
-            <aside className="sidebar">
-                <Navbar />
-            </aside>
-            <div className="mainContent">
-                <Header />
-                <div className="ProfilePage">
-                    {loading && <p>Loading...</p>}
-                    {error && <p>{error}</p>}
-                    <div className="card-grid">
-                    {posts.map((post) => (
-                        <Card key={post._id} image={post.imagePath || post.imageUrl} caption={post.caption} />
-                    ))}
-                </div>
+    fetchUserFriends();
+    fetchPosts();
+  }, []);
+
+  return (
+    <>
+      <div className="container">
+        <aside className="sidebar">
+          <Navbar />
+        </aside>
+        <div className="mainContent">
+          <Header />
+          <div className="ProfilePage">
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            <ProfilesList profiles={profiles} />
+            <div className="card-grid">
+              {posts.map((post) => (
+                <Card
+                  key={post._id}
+                  image={post.imagePath || post.imageUrl}
+                  caption={post.caption}
+                />
+              ))}
             </div>
+          </div>
         </div>
-    </div>
+      </div>
     </>
-);
+  );
 }
