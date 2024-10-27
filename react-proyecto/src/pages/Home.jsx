@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 import Card from "../Components/card";
 import "./Home.css";
@@ -71,22 +72,39 @@ export default function HomePage() {
       }
     };
 
-    const fetchUsers = async () => {
-      axios
-        .get("http://localhost:3000/api/user/all/", {
-          headers: { Authorization: "Bearer " + TOKEN },
-        })
-        .then((response) => {
-          //   console.log(response.data);
-          setProfiles(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    const fetchUserFriends = async () => {
+      let friends = [];
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/user/profile/" + jwtDecode(TOKEN).id,
+          {
+            headers: { Authorization: "Bearer " + TOKEN },
+          }
+        );
+
+        friends = response.data.user.friends.map((friend) => friend._id);
+
+        axios
+          .get("http://localhost:3000/api/user/all/", {
+            headers: { Authorization: "Bearer " + TOKEN },
+          })
+          .then((response) => {
+            const nonFriendProfiles = response.data.filter(
+              (profile) => !friends.includes(profile._id)
+            );
+
+            setProfiles(nonFriendProfiles);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     };
 
-    fetchUsers();
-    fetchPosts(); // Call the async function
+    fetchUserFriends();
+    fetchPosts();
   }, []);
 
   return (

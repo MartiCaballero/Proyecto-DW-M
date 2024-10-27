@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+
 import "./ProfileList.css";
 
 function ProfilesList({ profiles }) {
@@ -69,6 +71,26 @@ function ProfilesList({ profiles }) {
 }
 
 function ProfileCard({ profile }) {
+  const TOKEN = localStorage.getItem("token");
+
+  const addFriend = async () => {
+    axios
+      .post(
+        "http://localhost:3000/api/user/add-friend/" + profile._id,
+        {},
+        {
+          headers: { Authorization: "Bearer " + TOKEN },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="profile-card">
       <img
@@ -77,7 +99,7 @@ function ProfileCard({ profile }) {
       />
       <h3>{profile.username}</h3>
       <p>{profile.email}</p>
-      <button>Follow</button>
+      <button onClick={addFriend}>Follow</button>
     </div>
   );
 }
