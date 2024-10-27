@@ -37,6 +37,14 @@ const Navbar = () => {
           Create
         </button>
         <button onClick={() => navigate("/profile?id=" + id)}>Profile</button>
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+        >
+          Log out
+        </button>
       </nav>
     </div>
   );
