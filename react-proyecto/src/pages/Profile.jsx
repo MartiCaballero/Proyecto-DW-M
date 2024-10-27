@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Navbar from "../Components/navBar";
 import "./Profile.css";
 import ModalProfile from "../Components/modalProfile";
-import ModalAddFriend from "../Components/modalAddFriend";
 
 export default function ProfilePage() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
 
   // Estados para abrir/cerrar ambos modales
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddFriendModalOpen, setIsAddFriendModalOpen] = useState(false);
   const [user, setUser] = useState({});
 
   const [formData, setFormData] = useState({
@@ -27,9 +24,6 @@ export default function ProfilePage() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  const openAddFriendModal = () => setIsAddFriendModalOpen(true);
-  const closeAddFriendModal = () => setIsAddFriendModalOpen(false);
 
   const TOKEN = localStorage.getItem("token");
 
@@ -73,7 +67,7 @@ export default function ProfilePage() {
 
   return user.user ? (
     <div className="container">
-      <aside>
+      <aside className="sidebar">
         <Navbar />
       </aside>
       <div className="containerPrincipal">
@@ -88,14 +82,7 @@ export default function ProfilePage() {
               <div className="profileTop">
                 <h2>{user.user.username}</h2>
                 <div className="containerButtons">
-                  <button
-                    onClick={openAddFriendModal}
-                    className="addFriendButton"
-                  >
-                    Add friend
-                  </button>
-
-                  {jwtDecode(TOKEN).id == id ? (
+                  {jwtDecode(TOKEN).id === id ? (
                     <button onClick={openModal} className="editProfileButton">
                       Edit Profile
                     </button>
@@ -133,11 +120,6 @@ export default function ProfilePage() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-      )}
-
-      {/* Modal para Add Friend */}
-      {isAddFriendModalOpen && (
-        <ModalAddFriend closeModal={closeAddFriendModal} />
       )}
     </div>
   ) : (

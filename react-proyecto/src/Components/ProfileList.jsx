@@ -1,10 +1,29 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import "./ProfileList.css";
 
 function ProfilesList({ profiles }) {
-  const profilesPerPage = 5; // Number of profiles per page
   const [currentPage, setCurrentPage] = useState(0);
+  const [profilesPerPage, setProfilesPerPage] = useState(getProfilesPerPage());
+
+  // Function to determine profiles per page based on window width
+  function getProfilesPerPage() {
+    const width = window.innerWidth;
+    if (width < 600) return 2; // Mobile view
+    if (width < 900) return 3; // Tablet view
+    if (width < 1200) return 4; // Small desktop
+    return 5; // Large desktop
+  }
+
+  // Update profiles per page on window resize
+  useEffect(() => {
+    function handleResize() {
+      setProfilesPerPage(getProfilesPerPage());
+      setCurrentPage(0); // Reset to first page on resize
+    }
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Calculate the profiles for the current page
   const indexOfLastProfile = (currentPage + 1) * profilesPerPage;
