@@ -1,19 +1,20 @@
 .container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
 }
 
 .sidebar {
-    width: 20%; /* Sidebar ocupa el 20% de la pantalla */
-    background-color: #f0f0f0;
+  width: 20%; /* Sidebar ocupa el 20% de la pantalla */
+  background-color: #f0f0f0;
 }
 
-.ProfilePage{
-    min-width: 80%;
-    margin-top: 30%;
+.ProfilePage {
+  min-width: 80%;
+  margin-top: 30%;
 }
 .mainContent {
+<<<<<<< HEAD
     max-width: 80%; /* MainContent ocupa el 80% restante */
     padding: 20px;
     display: flex;
@@ -21,24 +22,33 @@
     align-items: center;
     overflow-y: auto; /* Permite hacer scroll si el contenido excede la altura */
     margin-bottom: 60px;
+=======
+  width: 80%; /* MainContent ocupa el 80% restante */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Permite hacer scroll si el contenido excede la altura */
+>>>>>>> f0b12e8 (Added ProfileList + fixes around everywhere.)
 }
 
 .card-grid {
-    display: flex;
-    flex-direction: column; /* Para una columna de cards */
-    gap: 20px;
-    width: 100%; /* Asegura que el grid ocupe el ancho de mainContent */
-    align-items: center; /* Centra las cards en el espacio disponible */
+  display: flex;
+  flex-direction: column; /* Para una columna de cards */
+  gap: 20px;
+  width: 100%; /* Asegura que el grid ocupe el ancho de mainContent */
+  align-items: center; /* Centra las cards en el espacio disponible */
 }
 
 .card-grid > * {
-    width: 80%; /* Cada card ocupa el 80% del ancho disponible */
-    max-width: 800px; /* Tamaño máximo opcional */
-    box-sizing: border-box;
+  width: 80%; /* Cada card ocupa el 80% del ancho disponible */
+  max-width: 800px; /* Tamaño máximo opcional */
+  box-sizing: border-box;
 }
 
 
 @media (max-width: 900px) {
+<<<<<<< HEAD
     .sidebar {
         width: 25%; 
     }
@@ -74,3 +84,27 @@
         margin:0;
     }
 }
+=======
+  .sidebar {
+    width: 25%; /* Sidebar un poco más grande en pantallas medianas */
+  }
+  .mainContent {
+    width: 75%;
+  }
+  .card-grid > * {
+    width: 90%; /* Cards un poco más grandes en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none; /* Oculta sidebar en pantallas pequeñas */
+  }
+  .mainContent {
+    width: 100%; /* MainContent ocupa todo el ancho */
+  }
+  .card-grid > * {
+    width: 90%; /* Cards ocupan 90% en pantallas pequeñas */
+  }
+}
+>>>>>>> f0b12e8 (Added ProfileList + fixes around everywhere.)

@@ -1,72 +1,52 @@
 /* Contenedor principal */
 .container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .sidebar {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh; 
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .mainContent {
-    margin-left: 250px;
-    padding: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  margin-left: 250px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .buttonEdit {
-    background: linear-gradient(90deg, #BD61DE 0%, #A6FADC 100%);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+  background: linear-gradient(90deg, #bd61de 0%, #a6fadc 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.containerPrincipal{
-    margin-top: 10%;
+.containerPrincipal {
+  margin-top: 10%;
 }
 
-.editProfileButton{
-    padding: 8px 16px;
-    background-color: #efefef;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.editProfileButton {
+  padding: 8px 16px;
+  background-color: #efefef;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.containerButtons{
-    justify-content: space-between;
-}
-
-@media screen and (max-width: 450px) {
-    
-    .mainContent{
-
-        margin: 0;
-        margin-top: 20%;
-        padding: 10px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 3fr);
-        gap: 10px;
-    }
-
-    .profileHeader {
-        margin:0;
-    }
+.containerButtons {
+  justify-content: space-between;
 }
