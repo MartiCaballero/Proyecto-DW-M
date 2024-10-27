@@ -14,22 +14,12 @@
   margin-top: 30%;
 }
 .mainContent {
-<<<<<<< HEAD
-    max-width: 80%; /* MainContent ocupa el 80% restante */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto; /* Permite hacer scroll si el contenido excede la altura */
-    margin-bottom: 60px;
-=======
   width: 80%; /* MainContent ocupa el 80% restante */
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto; /* Permite hacer scroll si el contenido excede la altura */
->>>>>>> f0b12e8 (Added ProfileList + fixes around everywhere.)
 }
 
 .card-grid {
@@ -46,45 +36,7 @@
   box-sizing: border-box;
 }
 
-
 @media (max-width: 900px) {
-<<<<<<< HEAD
-    .sidebar {
-        width: 25%; 
-    }
-    .mainContent {
-        width: 75%;
-    }
-    .card-grid > * {
-        width: 90%; 
-    }
-}
-
-@media screen and (max-width: 450px) {
-    
-        .ProfilePage{
-    
-            padding: 10px;
-            margin-bottom: 30%;
-            z-index: 1;
-        }
-
-        .card-grid{
-            margin-top: 10%;
-        }
-
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .profileHeader {
-        margin:0;
-    }
-}
-=======
   .sidebar {
     width: 25%; /* Sidebar un poco más grande en pantallas medianas */
   }
@@ -107,4 +59,3 @@
     width: 90%; /* Cards ocupan 90% en pantallas pequeñas */
   }
 }
->>>>>>> f0b12e8 (Added ProfileList + fixes around everywhere.)
