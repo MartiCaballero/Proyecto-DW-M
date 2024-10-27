@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
     return (
         <div className="container">
-            <aside className="sidebar">
+            <aside>
                 <Navbar />
             </aside>
             <div className="containerPrincipal">

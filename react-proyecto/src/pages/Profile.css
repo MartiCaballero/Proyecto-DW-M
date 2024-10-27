@@ -50,3 +50,23 @@
 .containerButtons{
     justify-content: space-between;
 }
+
+@media screen and (max-width: 450px) {
+    
+    .mainContent{
+
+        margin: 0;
+        margin-top: 20%;
+        padding: 10px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 3fr);
+        gap: 10px;
+    }
+
+    .profileHeader {
+        margin:0;
+    }
+}
