@@ -100,3 +100,9 @@
   background-color: #ddd;
   cursor: not-allowed;
 }
+
+.profile-card button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+  color: #999;
+}

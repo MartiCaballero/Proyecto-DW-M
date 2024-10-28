@@ -11,6 +11,7 @@ import ProfilesList from "../Components/ProfileList";
 export default function HomePage() {
   let [posts, setPosts] = useState([]);
   let [profiles, setProfiles] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -73,7 +74,6 @@ export default function HomePage() {
     };
 
     const fetchUserFriends = async () => {
-      let friends = [];
       try {
         const response = await axios.get(
           "http://localhost:3000/api/user/profile/" + jwtDecode(TOKEN).id,
@@ -82,30 +82,31 @@ export default function HomePage() {
           }
         );
 
-        friends = response.data.user.friends.map((friend) => friend._id);
-
-        axios
-          .get("http://localhost:3000/api/user/all/", {
-            headers: { Authorization: "Bearer " + TOKEN },
-          })
-          .then((response) => {
-            const nonFriendProfiles = response.data.filter(
-              (profile) => !friends.includes(profile._id)
-            );
-
-            setProfiles(nonFriendProfiles);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        // Assuming the friends list is part of the user data under `friends`
+        setFriends(response.data.user.friends.map((friend) => friend._id));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
+    const fetchUsers = async () => {
+      axios
+        .get("http://localhost:3000/api/user/all/", {
+          headers: { Authorization: "Bearer " + TOKEN },
+        })
+        .then((response) => {
+          setProfiles(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
 
+    fetchUsers();
     fetchUserFriends();
     fetchPosts();
   }, []);
+
+  console.log(friends);
 
   return (
     <>
@@ -118,7 +119,7 @@ export default function HomePage() {
           <div className="ProfilePage">
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <ProfilesList profiles={profiles} />
+            <ProfilesList profiles={profiles} friends={friends} />
             <div className="card-grid">
               {posts.map((post) => (
                 <Card
