@@ -13,7 +13,7 @@
   min-width: 80%;
   margin-top: 30%;
 }
-.mainContent {
+.mainContentHome {
   width: 80%; /* MainContent ocupa el 80% restante */
   padding: 20px;
   display: flex;
@@ -40,7 +40,7 @@
   .sidebar {
     width: 25%; /* Sidebar un poco más grande en pantallas medianas */
   }
-  .mainContent {
+  .mainContentHome {
     width: 75%;
   }
   .card-grid > * {
@@ -52,7 +52,7 @@
   .sidebar {
     display: none; /* Oculta sidebar en pantallas pequeñas */
   }
-  .mainContent {
+  .mainContentHome {
     width: 100%; /* MainContent ocupa todo el ancho */
   }
   .card-grid > * {

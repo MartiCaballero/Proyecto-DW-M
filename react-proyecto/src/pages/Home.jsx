@@ -111,10 +111,8 @@ export default function HomePage() {
   return (
     <>
       <div className="container">
-        <aside className="sidebar">
           <Navbar />
-        </aside>
-        <div className="mainContent">
+        <div className="mainContentHome">
           <Header />
           <div className="ProfilePage">
             {loading && <p>Loading...</p>}
